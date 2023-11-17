@@ -1,6 +1,10 @@
 Implemented for Gnu Octave / Matlab
 
-Main file: main_Heffter_Systems
+Main file: main_Heffter_Systems.m
+
+To download tbe folder as a .zip, click on the  <> Code  button, and then select Download Zip. After extracting the code, 
+it is possible to run the main file main_Heffter_Systems.m
+
 
 At the beginning of the code of the main it is possible to choose:
 	- the dimension n of the array, that can be either 3 or 4;
