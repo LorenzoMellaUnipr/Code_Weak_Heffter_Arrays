@@ -39,7 +39,6 @@ jj = 0;
     if norm(A - ones(n))==0
       jj = jj+1;
       classical_heffter{jj} = B;
-      [A, B]
     else
       j = j+1;
       possibly_strict_heffter{j} = abs(B);
