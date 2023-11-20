@@ -18,4 +18,3 @@ function H = isHeffter(A,B)
   endif
   H(rigA,rigB) = G(i);
  endfor
-
