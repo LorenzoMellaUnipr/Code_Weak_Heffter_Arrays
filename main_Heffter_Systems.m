@@ -30,6 +30,7 @@ elseif n==4
 
 endif
 
+disp('Possible weak Heffter arrays:')
 jj = 0;
   j = 0;
   classical_heffter = [];
