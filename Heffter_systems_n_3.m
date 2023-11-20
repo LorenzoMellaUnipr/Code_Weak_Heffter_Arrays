@@ -47,7 +47,7 @@ for i1 = 1:size(A1,1)
       for i3 = 1:size(A3(index2,:),1)
         b3 = A3(index2(i3),:);    % Third subset of Heffter system
         G = [b1, b2,b3];
-        index3 = intersect(index2,find(A_int(i3,:)));
+        index3 = intersect(index2,find(A_int(index2(i3),:)));
         if length(unique(G)) ==length(G)   % G is an Heffter system
           G = [b1; b2;b3];
           found = found+1;
@@ -55,22 +55,12 @@ for i1 = 1:size(A1,1)
           if noniso>0      % Is this a new Heffter system, or is it an old one?
             for ijk = 1:length(database)
               Old_Heffter = database{ijk};
-              Old_Heff_first_col = Old_Heffter(:,1); G1 = G(:,1); % estract first column
-
-              % If these two are the same Heffter system, then the first
-              % column should contain the same elements, hence there should
-              % be a permutation of the rows sending G to Old_Heffter.
-
-              if length(intersect(Old_Heff_first_col,G1)) == length(Old_Heff_first_col) % The columns contain the
-                                                              % same elements?
-                for ijk1 = 1:length(Old_Heff_first_col)
-                  index1(ijk1) = find(G1 == Old_Heff_first_col(ijk1));
-                endfor
-                Old_Heffter(index1,:) = Old_Heffter; % Permutation between the rows
-                if norm(Old_Heffter-G) ==0
+              % Check if every row contains the same elements:
+              for row_index = 1:size(G,1)
+                if max(abs(sort(G(row_index,:)) - sort(Old_Heffter(row_index,:))))==0
                   new_Heffter_System = false;
                 endif
-              endif
+              endfor
             endfor
             if (new_Heffter_System == true)
               noniso = noniso+1;
@@ -86,8 +76,10 @@ for i1 = 1:size(A1,1)
   endfor
 endfor
 
-database;% These are all the Heffter systems on the set of
+disp('Heffter systems for these parameters:')
+database % These are all the Heffter systems on the set of
          % symbols Sym
+
 
 
 % Can we find two Heffter Systems inside of database that are
@@ -135,4 +127,3 @@ for i = 1:mm
   endif
  endfor
 endfor
-
